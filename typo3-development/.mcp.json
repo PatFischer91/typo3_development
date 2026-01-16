@@ -1,9 +1,9 @@
 {
   "mcpServers": {
     "typo3-docs": {
-      "command": "python3",
+      "command": "bash",
       "args": [
-        "${pluginRoot}/mcp/typo3-docs-server/server.py"
+        "${pluginRoot}/mcp/typo3-docs-server/run.sh"
       ],
       "env": {
         "PYTHONUNBUFFERED": "1"
