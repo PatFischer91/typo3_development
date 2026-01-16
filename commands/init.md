@@ -9,7 +9,7 @@ Performs a detailed analysis of the TYPO3 project and creates comprehensive conf
 
 ## Auto-Initialization
 
-**Important:** Basic project detection happens AUTOMATICALLY at session start for new TYPO3 projects (when no `.claude/CLAUDE.md` exists yet). You don't need to run this command manually in most cases.
+**Important:** Basic project detection happens AUTOMATICALLY at session start for TYPO3 projects that haven't been initialized yet (no `CLAUDE.md` in project root). When you run the standard `/init` command, it creates `CLAUDE.md` - after that, auto-detection won't run again. You don't need to run `/typo3:init` manually in most cases.
 
 ## When to Use This Command
 

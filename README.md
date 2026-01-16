@@ -110,7 +110,7 @@ npm install -g @anthropic-ai/mcp-devtools-server
 
 ## 🚀 Quick Start
 
-**Auto-Detection:** When you open a TYPO3 project for the first time (no `.claude/CLAUDE.md` yet), the plugin automatically detects your TYPO3 version and configures itself. No manual setup needed!
+**Auto-Detection:** When you open a TYPO3 project that hasn't been initialized yet (no `CLAUDE.md` in project root), the plugin automatically detects your TYPO3 version and configures itself. No manual setup needed!
 
 For deeper analysis, you can optionally run:
 ```
