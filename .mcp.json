@@ -1,11 +1,22 @@
 {
   "mcpServers": {
     "typo3-docs": {
-      "command": "python",
+      "command": "python3",
       "args": [
-        "mcp/typo3-docs-server/server.py"
+        "${pluginRoot}/mcp/typo3-docs-server/server.py"
       ],
-      "env": {}
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "description": "TYPO3 Documentation Server - Provides access to TYPO3 docs, changelog, TER, and API reference"
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+        "@anthropic-ai/mcp-devtools-server"
+      ],
+      "env": {},
+      "description": "Chrome DevTools integration for testing TYPO3 frontend in browser. Enables viewport screenshots, DOM inspection, network monitoring, and automated testing."
     }
   }
 }

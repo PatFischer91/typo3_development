@@ -9,7 +9,7 @@ This plugin extends Claude Code with TYPO3-specific functionality:
 - **Skills** for automatic coding standards compliance
 - **Agents** for code validation and migration assistance
 - **Hooks** for automated quality checks
-- **MCP Server** for TYPO3 documentation integration
+- **MCP Servers** for TYPO3 documentation and browser testing
 
 ## ✨ Features
 
@@ -17,97 +17,149 @@ This plugin extends Claude Code with TYPO3-specific functionality:
 
 | Command | Description |
 |---------|-------------|
+| `/typo3:init` | **Run first!** Analyzes project, detects TYPO3 version, configures session |
 | `/typo3:extension` | Creates complete extension structure with best practices |
-| `/typo3:model` | Generates Domain Model + Repository + TCA |
-| `/typo3:plugin` | Creates plugin with Controller, Templates, and TypoScript |
+| `/typo3:model` | Generates Domain Model + Repository + TCA + SQL |
+| `/typo3:plugin` | Creates plugin with Controller, Templates, FlexForm |
 | `/typo3:controller` | Creates slim Extbase Controller with DI |
-| `/typo3:viewhelper` | Generates custom ViewHelper |
+| `/typo3:viewhelper` | Generates custom Fluid ViewHelper |
 | `/typo3:middleware` | Creates PSR-15 Middleware |
 | `/typo3:upgrade` | Assists with TYPO3 version upgrades |
 | `/typo3:test` | Creates Unit/Functional Tests |
 | `/typo3:migration` | Creates Doctrine DBAL Migration |
 | `/typo3:scheduler` | Creates Scheduler Task |
+| `/typo3:flexform` | Generates FlexForm XML configuration |
+| `/typo3:event` | Creates PSR-14 Event + Listener |
+| `/typo3:command` | Creates Symfony Console Command |
 
 ### 🤖 Skills (auto-activated)
 
-- **typo3-coding-standards** - Monitors TYPO3 CGL compliance
-- **extbase-patterns** - Suggests modern Extbase patterns
-- **fluid-best-practices** - Prevents business logic in templates
-- **dependency-injection** - Prefers DI over static calls
-- **security-awareness** - Warns about XSS, SQL injection, etc.
-- **doctrine-dbal** - Uses QueryBuilder instead of deprecated methods
-- **typo3-api** - Knows TYPO3 Core APIs and their usage
+| Skill | Description |
+|-------|-------------|
+| `typo3-coding-standards` | Monitors PSR-12 and TYPO3 CGL compliance |
+| `extbase-patterns` | Suggests modern Extbase patterns, slim controllers |
+| `fluid-best-practices` | Prevents business logic in templates |
+| `dependency-injection` | Prefers constructor DI over static calls |
+| `security-awareness` | Warns about XSS, SQL injection, CSRF |
+| `doctrine-dbal` | Uses QueryBuilder with named parameters |
+| `typo3-api` | Knows TYPO3 Core APIs (Caching, Logging, FAL) |
+| `content-blocks` | Guides TYPO3 v13+ Content Block creation |
+| `project-aware` | Adapts to detected TYPO3 version (v11/v12/v13) |
 
 ### 🔍 Agents
 
-- **typo3-validator** - Validates code against TYPO3 CGL and best practices
-- **typo3-migration-assistant** - Helps with major version upgrades
-- **typo3-security-scanner** - Finds security vulnerabilities
-- **tca-validator** - Validates TCA configurations
-- **typoscript-analyzer** - Analyzes TypoScript code
+| Agent | Description |
+|-------|-------------|
+| `typo3-validator` | Validates code against TYPO3 CGL and best practices |
+| `typo3-migration-assistant` | Helps with major version upgrades (v11→v12→v13) |
+| `typo3-security-scanner` | Finds security vulnerabilities (OWASP Top 10) |
+| `tca-validator` | Validates TCA configurations and column types |
+| `typoscript-analyzer` | Analyzes TypoScript for deprecated syntax |
 
 ### 🪝 Hooks
 
-- **PreToolUse: Write/Edit** - Validates TYPO3 code before saving
-- **PostToolUse: Write** - Runs PHP CS Fixer
-- **SessionStart** - Loads TYPO3 Coding Guidelines
-- **UserPromptSubmit** - Suggests TYPO3 best practices
+| Event | Action |
+|-------|--------|
+| `SessionStart` | Loads TYPO3 CGL + detects project config (.claude/typo3-project.json) |
+| `PreToolUse: Write/Edit PHP` | Validates TYPO3 best practices before saving |
+| `PreToolUse: Write/Edit HTML` | Checks Fluid templates for anti-patterns |
+| `PreToolUse: Write/Edit TCA` | Validates TCA configuration |
+| `PostToolUse: Write PHP` | Runs PHP CS Fixer (if available) |
+| `PostToolUse: ext_tables.sql` | Reminds to run `extension:setup` |
+| `UserPromptSubmit` | Context-aware suggestions (controller, model, query, etc.) |
 
 ### 🌐 MCP Server Integration
 
-- **TYPO3 Documentation** - Direct access to docs.typo3.org
-- **Extension Repository** - Search TER (TYPO3 Extension Repository)
-- **Changelog Lookup** - Browse TYPO3 Core Changelog
-- **API Reference** - TYPO3 Core API Reference
+#### TYPO3 Documentation Server (with real TER API)
+- **search_typo3_docs** - Search docs.typo3.org with curated links
+- **get_typo3_changelog** - Browse TYPO3 Core Changelog (v11/v12/v13)
+- **search_typo3_extensions** - Search TER with real API calls
+- **get_extension_detail** - Get detailed extension info from TER
+- **get_typo3_api_reference** - TYPO3 Core API Reference with examples
+- **get_typo3_coding_guidelines** - Official CGL reference (PHP, DB, Fluid, Security)
+
+#### Chrome DevTools Integration
+Test TYPO3 frontend directly in the browser:
+- Take viewport/full-page screenshots
+- Inspect DOM and accessibility tree
+- Monitor network requests
+- Run automated tests (click, type, navigate)
+- Analyze Core Web Vitals performance
+
+See [Chrome DevTools Documentation](./docs/CHROME-DEVTOOLS.md)
 
 ## 📦 Installation
 
 ```bash
-# Install plugin (when public)
-/plugin install typo3-development
+# Clone plugin
+git clone https://github.com/PatFischer91/typo3_development.git ~/.claude/plugins/typo3-development
 
-# Or test locally
-claude --plugin-dir ./typo3_development
+# Or install via Claude Code (when available)
+/plugin install typo3-development
+```
+
+### MCP Server Requirements
+
+```bash
+# For TYPO3 Docs Server
+pip install mcp httpx
+
+# For Chrome DevTools (optional)
+npm install -g @anthropic-ai/mcp-devtools-server
 ```
 
 ## 🚀 Quick Start
 
-1. **Create extension**:
+0. **Initialize project** (run first in any TYPO3 project):
    ```
-   /typo3:extension my_extension "MyVendor"
+   /typo3:init
+   ```
+   This detects your TYPO3 version, PHP version, installed extensions, and configures Claude Code for your specific setup.
+
+1. **Create new extension**:
+   ```
+   /typo3:extension my_shop MyVendor "Online shop extension"
    ```
 
-2. **Generate model with repository and TCA**:
+2. **Generate domain model**:
    ```
-   /typo3:model Product "A product in the shop"
-   ```
-
-3. **Create controller**:
-   ```
-   /typo3:controller ProductController
+   /typo3:model Product "title:string,price:float,stock:int,active:bool"
    ```
 
-4. **Write tests**:
+3. **Create plugin**:
    ```
-   /typo3:test ProductControllerTest
+   /typo3:plugin ProductList "List products"
+   ```
+
+4. **Add tests**:
+   ```
+   /typo3:test ProductService functional
+   ```
+
+5. **Prepare for upgrade**:
+   ```
+   /typo3:upgrade 11.5 12.4
    ```
 
 ## 🛠️ Configuration
 
-The plugin automatically uses TYPO3 Coding Guidelines from:
-- https://github.com/in2code-de/claude-code-instructions/blob/main/CLAUDE.md
-- Official TYPO3 CGL: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/CodingGuidelines/
+### Built-in Guidelines
 
-### Optional Plugin Configuration
+The plugin includes **complete TYPO3 Coding Guidelines** loaded at session start:
+- PSR-12 PHP Coding Standards
+- TYPO3-specific conventions (`defined('TYPO3') || die();`)
+- Modern patterns (DI, QueryBuilder, ResponseInterface)
+- Security best practices
 
-Create `.claude/typo3-config.json` in your project:
+### Optional Project Configuration
+
+Create `.claude/typo3-config.json`:
 
 ```json
 {
   "typo3Version": "12.4",
   "extensionKey": "my_extension",
   "vendorName": "MyVendor",
-  "guidelinesUrl": "https://github.com/in2code-de/claude-code-instructions/blob/main/CLAUDE.md",
   "autoEnforce": {
     "codingStandards": true,
     "dependencyInjection": true,
@@ -121,33 +173,77 @@ Create `.claude/typo3-config.json` in your project:
 ## 📚 Documentation
 
 - [Architecture](./docs/ARCHITECTURE.md) - Plugin architecture and concepts
+- [Chrome DevTools](./docs/CHROME-DEVTOOLS.md) - Browser testing setup
 - [Skills Guide](./docs/SKILLS.md) - All skills in detail
 - [Commands Reference](./docs/COMMANDS.md) - All slash commands
 - [Hooks Configuration](./docs/HOOKS.md) - Hook system
-- [MCP Integration](./docs/MCP.md) - MCP Server setup
-- [Development Guide](./docs/DEVELOPMENT.md) - Plugin development
+
+## 🔧 Directory Structure
+
+```
+typo3_development/
+├── .claude-plugin/
+│   └── plugin.json           # Plugin metadata
+├── commands/                  # 14 Slash commands
+│   ├── init.md               # Project initialization
+│   ├── extension.md
+│   ├── model.md
+│   ├── plugin.md
+│   ├── controller.md
+│   ├── viewhelper.md
+│   ├── middleware.md
+│   ├── upgrade.md
+│   ├── test.md
+│   ├── migration.md
+│   ├── scheduler.md
+│   ├── flexform.md
+│   ├── event.md
+│   └── command.md
+├── skills/                    # 9 Auto-activated skills
+│   ├── typo3-coding-standards/
+│   ├── extbase-patterns/
+│   ├── fluid-best-practices/
+│   ├── dependency-injection/
+│   ├── security-awareness/
+│   ├── doctrine-dbal/
+│   ├── typo3-api/
+│   ├── content-blocks/
+│   └── project-aware/        # Version-specific adaptations
+├── agents/                    # 5 Specialized agents
+│   ├── typo3-validator/
+│   ├── typo3-migration-assistant/
+│   ├── typo3-security-scanner/
+│   ├── tca-validator/
+│   └── typoscript-analyzer/
+├── hooks/
+│   └── hooks.json            # Event-driven automation
+├── mcp/
+│   └── typo3-docs-server/    # TYPO3 Documentation MCP
+├── .mcp.json                  # MCP configuration
+└── docs/                      # Documentation
+```
 
 ## 🤝 Contributing
 
-Contributions are welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md)
+Contributions are welcome!
+
+1. Fork the repository
+2. Create feature branch
+3. Follow TYPO3 CGL
+4. Submit pull request
 
 ## 📄 License
 
-MIT License - see [LICENSE](./LICENSE)
-
-## 🙏 Credits
-
-- TYPO3 Community
-- [in2code Claude Code Instructions](https://github.com/in2code-de/claude-code-instructions)
-- Claude Code Team
+MIT License
 
 ## 🔗 Links
 
 - [TYPO3 CMS](https://typo3.org)
 - [TYPO3 Documentation](https://docs.typo3.org)
+- [TYPO3 Coding Guidelines](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/CodingGuidelines/)
 - [Claude Code Documentation](https://code.claude.com/docs)
 - [Model Context Protocol](https://modelcontextprotocol.io)
 
 ---
 
-**Status**: 🚧 In Development - v0.1.0 (Private Beta)
+**Version**: 0.3.0 | **Status**: 🚧 Beta
