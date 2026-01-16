@@ -90,23 +90,41 @@ See [Chrome DevTools Documentation](./docs/CHROME-DEVTOOLS.md)
 
 ## 📦 Installation
 
-```bash
-# Clone plugin
-git clone https://github.com/PatFischer91/typo3_development.git ~/.claude/plugins/typo3-development
+### Via Plugin Manager (Recommended)
 
-# Or install via Claude Code (when available)
-/plugin install typo3-development
+```bash
+# Open Claude Code plugin manager
+/plugin
+
+# Add marketplace and install
+/plugin marketplace add PatFischer91/typo3_development
+/plugin install typo3-development@PatFischer91/typo3_development
 ```
 
-### MCP Server Requirements
+### Via CLI
+
+```bash
+claude plugin marketplace add PatFischer91/typo3_development
+claude plugin install typo3-development@PatFischer91/typo3_development
+```
+
+### Manual Installation
+
+```bash
+git clone https://github.com/PatFischer91/typo3_development.git ~/.claude/plugins/typo3-development
+```
+
+### MCP Server Requirements (Optional)
 
 ```bash
 # For TYPO3 Docs Server
 pip install mcp httpx
 
-# For Chrome DevTools (optional)
+# For Chrome DevTools
 npm install -g @anthropic-ai/mcp-devtools-server
 ```
+
+See [Installation Guide](./docs/INSTALLATION.md) for detailed instructions.
 
 ## 🚀 Quick Start
 
@@ -173,11 +191,9 @@ Create `.claude/typo3-config.json`:
 
 ## 📚 Documentation
 
-- [Architecture](./docs/ARCHITECTURE.md) - Plugin architecture and concepts
+- [Installation Guide](./docs/INSTALLATION.md) - How to install the plugin
+- [Feature Reference](./docs/FEATURES.md) - Complete feature documentation
 - [Chrome DevTools](./docs/CHROME-DEVTOOLS.md) - Browser testing setup
-- [Skills Guide](./docs/SKILLS.md) - All skills in detail
-- [Commands Reference](./docs/COMMANDS.md) - All slash commands
-- [Hooks Configuration](./docs/HOOKS.md) - Hook system
 
 ## 🔧 Directory Structure
 

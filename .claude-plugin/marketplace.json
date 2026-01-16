@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "typo3-development-marketplace",
+  "version": "1.0.0",
+  "description": "TYPO3 Development Plugin for Claude Code - Coding standards, extension scaffolding, and best practices automation",
+  "owner": {
+    "name": "PatFischer91",
+    "email": "github@patfischer91.dev"
+  },
+  "plugins": [
+    {
+      "name": "typo3-development",
+      "description": "Comprehensive TYPO3 development plugin with 14 commands, 9 skills, 5 agents, and MCP servers for documentation and browser testing",
+      "version": "0.3.0",
+      "author": {
+        "name": "PatFischer91"
+      },
+      "source": ".",
+      "category": "development",
+      "tags": ["typo3", "extbase", "fluid", "cms", "php", "coding-standards"]
+    }
+  ]
+}
