@@ -236,4 +236,4 @@ MIT License
 
 ---
 
-**Version**: 1.0.2 | **Status**: Stable
+**Version**: 1.1.0 | **Status**: Stable
