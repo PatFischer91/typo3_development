@@ -38,6 +38,7 @@ This plugin extends Claude Code with tailored capabilities for TYPO3 development
 | `/typo3:api` | Get TYPO3 Core API reference with examples |
 | `/typo3:cgl` | Get TYPO3 Coding Guidelines reference |
 | `/typo3:test-browser` | Test TYPO3 frontend/backend in Chrome browser |
+| `/typo3:bugfix` | Systematically debug and fix bugs with intelligent automation |
 
 ###### Skills (auto-activated)
 
@@ -64,6 +65,7 @@ This plugin extends Claude Code with tailored capabilities for TYPO3 development
 | `tca-validator` | Validates TCA configurations and column types |
 | `typoscript-analyzer` | Analyzes TypoScript for deprecated syntax |
 | `typo3-browser-tester` | Automated browser testing for frontend and backend |
+| `typo3-bugfix` | Systematic bug fixing with reproduction, analysis, fix, and verification |
 
 ###### Hooks
 
@@ -163,6 +165,11 @@ For deeper analysis, you can optionally run:
    /typo3:upgrade 11.5 12.4
    ```
 
+7. **Fix bug systematically**:
+   ```
+   /typo3:bugfix ticket:T-1234
+   ```
+
 #### Configuration
 
 ###### Built-in Guidelines
@@ -191,6 +198,7 @@ For detailed information, see the [Configuration Guide](typo3-dev/docs/CONFIGURA
 - [Configuration Guide](typo3-dev/docs/CONFIGURATION.md) - Project configuration options
 - [Feature Reference](typo3-dev/docs/FEATURES.md) - Complete feature documentation
 - [Chrome DevTools](typo3-dev/docs/CHROME-DEVTOOLS.md) - Browser testing setup
+- [Bugfix Workflow](typo3-dev/docs/BUGFIX-WORKFLOW.md) - Systematic bug fixing guide
 
 #### Directory Structure
 
