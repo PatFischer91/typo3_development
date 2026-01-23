@@ -23,8 +23,8 @@
 # Analyze extension
 /typo3:init
 
-# Get help
-/typo3:help
+# Analyze project
+/typo3:init
 ```
 
 ---
@@ -203,7 +203,7 @@ my_ext/
 2. **Version-Specific:** Always specify version in docs search
 3. **Combine Init + Docs:** `/typo3:init` then search suggested topics
 4. **Scope Changed:** Use `scope:changed` for daily work
-5. **Check Help:** `/typo3:help` shows all commands
+5. **Tab Completion:** Type `/typo3:` + Tab to see all commands
 
 ---
 
@@ -214,7 +214,7 @@ my_ext/
 | SessionStart error | Check plugin installed correctly |
 | No tracking files | Ensure you're in a git repo |
 | Too many suggestions | Built-in 15min cooldown |
-| Command not found | Check `/typo3:help` |
+| Command not found | Type `/typo3:` + Tab to see available commands |
 | Guidelines not loading | Restart Claude session |
 
 ---
@@ -222,10 +222,8 @@ my_ext/
 ## 📞 Getting Help
 
 ```bash
-# In-app help
-/typo3:help                    # All commands
-/typo3:help create             # Creation commands
-/typo3:help refactor           # Refactoring commands
+# Available commands
+Type /typo3: and press Tab to see all commands
 
 # Documentation
 docs/GETTING-STARTED.md        # Detailed guide

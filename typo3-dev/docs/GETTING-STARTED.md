@@ -21,9 +21,9 @@ The plugin automatically:
 
 ### 3. Try Your First Command
 ```
-/typo3:help
+/typo3:init
 ```
-See all available commands organized by category.
+Analyzes your TYPO3 project and shows available features.
 
 ---
 
@@ -412,9 +412,9 @@ echo $(( ($(date +%s) - $(cat .git/.code-simplify-session-start)) / 60 )) minute
 ```
 
 ### Tip 4: Quick Reference
-Keep the command reference handy:
+See the quick reference card:
 ```
-/typo3:help
+docs/QUICK-REFERENCE.md
 ```
 
 ### Tip 5: Version-Specific Help
@@ -475,13 +475,13 @@ The plugin chooses agents automatically when appropriate. You typically just use
 ## 📚 Next Steps
 
 1. **Try the Workflows Above** - Pick one that matches your task
-2. **Explore Commands** - `/typo3:help` shows everything
+2. **Explore Commands** - Type `/typo3:` + Tab or see `docs/QUICK-REFERENCE.md`
 3. **Read Feature Docs** - See `docs/FEATURES.md` for details
 4. **Check Examples** - Real-world patterns in each command
 
 **Need Help?**
 - GitHub Issues: https://github.com/PatFischer91/claude-typo3-dev/issues
-- Command Reference: `/typo3:help`
+- Command Reference: `docs/QUICK-REFERENCE.md`
 - Full Documentation: `docs/` directory
 
 ---
