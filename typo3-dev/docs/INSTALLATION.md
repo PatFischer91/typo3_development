@@ -1,42 +1,34 @@
 # Installation Guide
 
-## Quick Installation
+## Quick Installation (2 Steps)
 
-### Option 1: Via Plugin Manager (Recommended)
-
-```bash
-# In Claude Code, open plugin manager
-/plugin
-
-# Then select "Discover" and search for "typo3"
-# Or add the marketplace directly:
-/plugin marketplace add PatFischer91/claude-typo3-dev
-```
-
-### Option 2: Direct Installation
+### Step 1: Clone the Repository
 
 ```bash
-# Install directly from GitHub
-/plugin install typo3-dev@in2code
+# Clone from GitHub
+git clone https://github.com/PatFischer91/claude-typo3-dev.git
+
+# Navigate into the directory
+cd claude-typo3-dev
 ```
 
-### Option 3: CLI Installation
+### Step 2: Install the Plugin
 
+**Option A: Global Installation (Recommended)**
 ```bash
-# From your terminal
-claude plugin marketplace add PatFischer91/claude-typo3-dev
-claude plugin install typo3-dev@in2code
+# Install from local directory
+claude plugin install ./typo3-dev
 ```
 
-### Option 4: Manual Installation
+The plugin will be installed to `~/.claude/plugins/typo3-dev/` and available in all your projects.
 
+**Option B: Project-Specific Installation**
 ```bash
-# Clone to your plugins directory
-git clone https://github.com/PatFischer91/claude-typo3-dev.git ~/.claude/plugins/in2code
-
-# Or for project-specific installation
-git clone https://github.com/PatFischer91/claude-typo3-dev.git .claude/plugins/in2code
+# From your project directory
+claude plugin install /path/to/claude-typo3-dev/typo3-dev --scope project
 ```
+
+The plugin will only be available in the current project.
 
 ## Requirements
 
@@ -88,31 +80,52 @@ After installation, verify the plugin is active:
 ## Uninstallation
 
 ```bash
-# Via plugin manager
-/plugin uninstall typo3-dev
+# Via CLI
+claude plugin uninstall typo3-dev
 
-# Or via CLI
-claude plugin uninstall typo3-dev@in2code
+# Or via plugin manager in Claude Code
+/plugin uninstall typo3-dev
 ```
 
 ## Updating
 
 ```bash
-# Update marketplace index
-/plugin marketplace update
+# Navigate to the cloned repository
+cd claude-typo3-dev
+git pull origin main
 
-# Reinstall plugin for latest version
-/plugin uninstall typo3-dev
-/plugin install typo3-dev@in2code
+# Reinstall the plugin
+claude plugin uninstall typo3-dev
+claude plugin install ./typo3-dev
 ```
 
 ## Troubleshooting
 
-### Plugin not found
+### "Plugin not found" error
 
-Make sure the marketplace is added:
+**Problem:** You're trying to install without cloning first.
+
+**Solution:**
 ```bash
-/plugin marketplace add PatFischer91/claude-typo3-dev
+# Step 1: Clone the repository
+git clone https://github.com/PatFischer91/claude-typo3-dev.git
+cd claude-typo3-dev
+
+# Step 2: Install from the local directory
+claude plugin install ./typo3-dev
+```
+
+### "Marketplace not found" error
+
+**Problem:** You're trying to install from a marketplace that doesn't exist.
+
+**Solution:** Don't use marketplace syntax. Install directly from the local directory:
+```bash
+# Wrong (needs marketplace):
+claude plugin install typo3-dev
+
+# Correct (local install):
+claude plugin install ./typo3-dev
 ```
 
 ### MCP Server errors
